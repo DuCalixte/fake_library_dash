@@ -20,6 +20,15 @@ pickle-email-*.html
 !/log/.keep
 !/tmp/.keep
 
+# Ignore all logfiles and tempfiles.
+library-api/log/*
+library-api/tmp/*
+library-ui/node_modules/*
+library-apivendor/*
+!library-api/vendor/.keep
+!library-api/log/.keep
+!library-api/tmp/.keep
+
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
 config/master.key
