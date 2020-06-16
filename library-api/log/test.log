@@ -1,0 +1,48 @@
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (6.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (83.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "library_api_test"[0m
+  [1m[35m (563.9ms)[0m  [1m[35mCREATE DATABASE "library_api_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (28.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "pgcrypto"[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "book_library_infos" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "book_library_infos" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "book_id" character varying, "status" integer, "is_checkout" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "book_list_infos" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "book_list_infos" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "book_id" character varying, "user_id" character varying, "list_id" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "book_lists" CASCADE[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "book_lists" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "title" character varying, "description" character varying, "user_id" character varying, "quantity" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "books" CASCADE[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "books" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "title" character varying, "isbn" character varying, "description" character varying, "quantity" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "author" character varying, "publisher" character varying, "genre" character varying)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "checkouts" CASCADE[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "checkouts" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "user_id" character varying, "book_id" character varying, "book_library_id" character varying, "checkout_date" date, "return_date" date, "last_status" integer, "status" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "due_date" date)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY, "username" character varying, "firstname" character varying, "lastname" character varying, "is_admin" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200615082221)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200615055402),
+(20200615060342),
+(20200615060406),
+(20200615060658),
+(20200615061140),
+(20200615061319),
+(20200615061545),
+(20200615073925);
+
+[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-06-15 14:17:44.540746"], ["updated_at", "2020-06-15 14:17:44.540746"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "06e54a05c568b2401a7433e3f1ff1ee8bcd906a1"], ["created_at", "2020-06-15 14:17:44.554753"], ["updated_at", "2020-06-15 14:17:44.554753"]]
+  [1m[35m (16.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
